@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>POS Offline Prototype</title>
+    <link rel="stylesheet" href="styles.css" />
+    <meta name="description" content="POS offline dengan SQLite (sql.js) dan scanner EAN-13" />
+    <link rel="manifest" href="manifest.json">
+  </head>
+  <body>
+    <div id="app">
+      <header>
+        <h1>POS Offline</h1>
+        <div id="role-select">
+          <label>Pilih Role:</label>
+          <button id="role-cashier">Kasir</button>
+          <button id="role-admin">Admin</button>
+        </div>
+      </header>
+
+      <main>
+        <section id="cashier-page" class="page hidden">
+          <h2>Kasir</h2>
+          <div class="controls">
+            <button id="btn-start-scan" class="primary large">Scan Barcode</button>
+            <input id="manual-code" placeholder="Masukkan kode barang" />
+            <button id="btn-manual-add" class="secondary">Tambah Manual</button>
+          </div>
+
+          <div id="scanner" class="scanner hidden">
+            <video id="video" autoplay muted playsinline></video>
+            <div id="scanner-message"></div>
+            <button id="btn-stop-scan">Stop Scan</button>
+          </div>
+
+          <div id="cart">
+            <h3>Daftar Belanja</h3>
+            <table id="cart-table">
+              <thead><tr><th>Produk</th><th>Jumlah</th><th>Harga</th><th>Total</th><th>Aksi</th></tr></thead>
+              <tbody></tbody>
+            </table>
+            <div id="cart-total">Total: <span id="total-value">0</span></div>
+            <div class="controls">
+              <select id="payment-method">
+                <option value="cash">Cash</option>
+                <option value="e-wallet">E-Wallet</option>
+              </select>
+              <button id="btn-save-transaction" class="primary large">Simpan Transaksi</button>
+            </div>
+          </div>
+        </section>
+
+        <section id="admin-page" class="page hidden">
+          <h2>Admin</h2>
+          <div id="product-form">
+            <input id="p-kode" placeholder="Kode Barang (EAN)" />
+            <input id="p-nama" placeholder="Nama" />
+            <input id="p-harga" placeholder="Harga" type="number" />
+            <input id="p-stok" placeholder="Stok" type="number" />
+            <input id="p-kategori" placeholder="Kategori" />
+            <button id="btn-add-product" class="primary">Simpan / Tambah</button>
+          </div>
+          <h3>Daftar Produk</h3>
+          <table id="products-table">
+            <thead><tr><th>Kode</th><th>Nama</th><th>Harga</th><th>Stok</th><th>Kategori</th><th>Aksi</th></tr></thead>
+            <tbody></tbody>
+          </table>
+          <h3>Log Aktivitas</h3>
+          <ul id="logs"></ul>
+        </section>
+      </main>
+
+      <footer>
+        <small>Offline POS Prototype — Semua data disimpan lokal</small>
+      </footer>
+    </div>
+
+    <script src="https://unpkg.com/@zxing/browser@0.0.11/dist/index.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.6.2/sql-wasm.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
