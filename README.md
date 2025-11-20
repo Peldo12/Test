@@ -28,5 +28,35 @@ File penting:
 - `/app.js` — logika aplikasi (DB, scanner, UI handlers)
 - `/styles.css` — gaya sederhana
 
+Cara menjalankan (dev):
+1. Jalankan server HTTP dari folder proyek:
+```bash
+cd /workspaces/Test
+python3 -m http.server 8000
+```
+2. Buka `http://localhost:8000/` di browser (untuk tes kamera gunakan device Android atau Chrome dengan permissions).
+
+Menjadikan aplikasi sebagai PWA / Build untuk Android (opsi simple dengan Capacitor):
+- Install Capacitor global atau di project: `npm install @capacitor/cli @capacitor/core --save-dev`
+- Inisialisasi Capacitor dan tambahkan platform Android:
+```bash
+npx cap init
+npx cap add android
+```
+- Salin file web Anda ke folder `webDir` yang ditentukan di `capacitor.config.json` (mis. `www` atau build folder dari bundler), lalu sync dan buka Android Studio:
+```bash
+npx cap copy
+npx cap open android
+```
+- Untuk produksi di Android direkomendasikan menggunakan plugin native SQLite / Room (mis. `cordova-sqlite-storage` atau plugin Capacitor SQLite) dan berpindah dari `sql.js` ke native SQLite untuk performa dan persistensi.
+
+Backup & Restore
+- Gunakan fitur Admin -> Backup / Restore untuk ekspor `.sqlite` atau base64.
+
+Catatan keamanan & produksi:
+- Password disimpan dengan hashing SHA-256 (tanpa salt) di prototype; untuk produksi gunakan hashing ter-salt (PBKDF2/Argon2) dan mekanisme penyimpanan yang lebih aman.
+- Untuk penggunaan di Android secara offline jangka panjang, gunakan Capacitor + native SQLite/Room.
+
+
 Lisensi: contoh bebas pakai untuk pengembangan internal.
 # Test

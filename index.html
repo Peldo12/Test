@@ -7,15 +7,29 @@
     <link rel="stylesheet" href="styles.css" />
     <meta name="description" content="POS offline dengan SQLite (sql.js) dan scanner EAN-13" />
     <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="icon-192.svg" sizes="192x192" />
+    <link rel="apple-touch-icon" href="icon-192.svg" />
   </head>
   <body>
     <div id="app">
       <header>
         <h1>POS Offline</h1>
-        <div id="role-select">
-          <label>Pilih Role:</label>
-          <button id="role-cashier">Kasir</button>
-          <button id="role-admin">Admin</button>
+        <div id="login-box">
+          <h2>Login</h2>
+          <div class="controls">
+            <label for="login-role">Role:</label>
+            <select id="login-role">
+              <option value="cashier">Kasir</option>
+              <option value="admin">Admin</option>
+            </select>
+            <input id="login-username" placeholder="Username" />
+            <input id="login-password" placeholder="Password (admin saja)" type="password" />
+            <button id="btn-login" class="primary large">Login</button>
+          </div>
+        </div>
+        <div id="header-user" class="hidden">
+          <span id="current-user"></span>
+          <button id="btn-logout">Logout</button>
         </div>
       </header>
 
@@ -66,6 +80,44 @@
             <thead><tr><th>Kode</th><th>Nama</th><th>Harga</th><th>Stok</th><th>Kategori</th><th>Aksi</th></tr></thead>
             <tbody></tbody>
           </table>
+          <h3>Manajemen Pengguna</h3>
+          <div id="user-form" class="controls">
+            <input id="u-username" placeholder="Username" />
+            <input id="u-password" placeholder="Password" type="password" />
+            <select id="u-role">
+              <option value="cashier">Kasir</option>
+              <option value="admin">Admin</option>
+            </select>
+            <button id="btn-add-user" class="primary">Tambah User</button>
+          </div>
+          <div id="user-change" class="controls">
+            <label for="u-select-user">Pilih user:</label>
+            <select id="u-select-user"></select>
+            <input id="u-new-password" placeholder="Password baru" type="password" />
+            <button id="btn-change-password" class="primary">Ubah Password</button>
+            <span id="pwd-strength" style="margin-left:8px;color:#666;font-size:13px"></span>
+          </div>
+          <table id="users-table">
+            <thead><tr><th>Username</th><th>Role</th><th>Aksi</th></tr></thead>
+            <tbody></tbody>
+          </table>
+          <h3>Backup / Restore Database</h3>
+          <div class="controls" id="backup-controls">
+            <button id="btn-export-sqlite" class="secondary">Export .sqlite</button>
+            <button id="btn-export-base64" class="secondary">Tampilkan Base64</button>
+            <button id="btn-copy-base64" class="secondary">Salin Base64</button>
+          </div>
+          <div class="controls" style="margin-top:8px">
+            <label for="file-import-input">Import .sqlite:</label>
+            <input id="file-import-input" type="file" accept=".sqlite,application/octet-stream" />
+            <button id="btn-import-file" class="primary">Import File</button>
+          </div>
+          <div class="controls" style="margin-top:8px">
+            <label for="base64-textarea">Import Base64:</label>
+            <textarea id="base64-textarea" placeholder="Tempelkan base64 DB di sini" rows="4" style="width:100%"></textarea>
+            <button id="btn-import-base64" class="primary">Import Base64</button>
+          </div>
+          <div id="backup-status" style="margin-top:8px;color:#333"></div>
           <h3>Log Aktivitas</h3>
           <ul id="logs"></ul>
         </section>
