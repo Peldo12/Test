@@ -3,6 +3,22 @@
   "version": "0.1.0",
   "description": "Prototype POS offline (PWA) dengan sqlite.js dan scanner EAN-13",
   "scripts": {
+    "start": "python3 -m http.server 8000",
+    "serve": "python3 -m http.server 8000",
+    "prepare:web": "rm -rf www && mkdir -p www && cp index.html app.js styles.css manifest.json offline.html service-worker.js icon-192.svg icon-512.svg README.md www/ || true",
+    "cap:init": "npx cap init pos-offline com.example.posoffline --web-dir=www",
+    "cap:add-android": "npx cap add android",
+    "cap:copy": "npx cap copy",
+    "cap:open-android": "npx cap open android"
+  },
+  "author": "",
+  "license": "MIT"
+}
+{
+  "name": "pos-offline-prototype",
+  "version": "0.1.0",
+  "description": "Prototype POS offline (PWA) dengan sqlite.js dan scanner EAN-13",
+  "scripts": {
     "start": "python3 -m http.server 8000"
   },
   "author": "",

@@ -1,6 +1,6 @@
 {
   "appId": "com.example.posoffline",
   "appName": "POS Offline",
-  "webDir": "",
+  "webDir": "www",
   "bundledWebRuntime": false
 }
