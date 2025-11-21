@@ -4,6 +4,8 @@
 }
 *{box-sizing:border-box}
 body{font-family:Arial,Helvetica,sans-serif;margin:0;background:var(--bg);color:#111}
+/* Center app container for all viewports (keeps content centered) */
+#app{max-width:1100px;margin:0 auto;width:100%}
 header{background:#fff;padding:12px;border-bottom:1px solid #ddd;display:flex;align-items:center;justify-content:space-between}
 header h1{margin:0;font-size:20px}
 /* Allow header items to wrap on small screens */
@@ -35,10 +37,24 @@ input,select{padding:8px;border:1px solid #ccc;border-radius:6px}
   .controls > textarea{width:100%}
   .large{padding:12px 14px}
   #video{max-width:100%;height:auto}
-  .page{padding:12px}
+  .page{padding:12px;text-align:center}
   table{min-width:600px}
   .table-responsive{overflow-x:auto}
   .footer-controls{display:flex;justify-content:center;margin-bottom:6px}
+}
+
+/* Mobile banner: hidden by default, show on small screens */
+.mobile-banner{display:none}
+@media (max-width:699px){
+  .mobile-banner{display:block;background:linear-gradient(90deg,#0b6efd,#0b8bff);color:#fff;padding:10px 12px;border-radius:8px;margin:10px 0;text-align:center;font-size:14px}
+  .mobile-banner a{color:rgba(255,255,255,0.95);text-decoration:underline}
+}
+
+/* close button inside banner */
+.mobile-banner-close{position:absolute;right:12px;top:8px;background:transparent;border:0;color:#fff;font-size:20px;line-height:1;cursor:pointer}
+@media (max-width:699px){
+  .mobile-banner{position:relative;padding-right:40px}
+  .mobile-banner-close{display:block}
 }
 
 /* Table wrapper for horizontal scrolling when needed */
