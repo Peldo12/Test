@@ -26,6 +26,27 @@ async function initSqlJs() {
   }
 }
 
+/* Mobile banner: show on small screens unless dismissed by user */
+function setupMobileBanner(){
+  const banner = document.getElementById('mobile-banner');
+  if (!banner) return;
+  const closeBtn = document.getElementById('mobile-banner-close');
+  function updateVisibility(){
+    const dismissed = localStorage.getItem('mobileBannerDismissed') === '1';
+    if (dismissed){ banner.style.display = 'none'; return; }
+    if (window.innerWidth <= 699) banner.style.display = 'block';
+    else banner.style.display = 'none';
+  }
+  if (closeBtn){
+    closeBtn.addEventListener('click', ()=>{
+      banner.style.display = 'none';
+      localStorage.setItem('mobileBannerDismissed','1');
+    });
+  }
+  window.addEventListener('resize', updateVisibility);
+  updateVisibility();
+}
+
 function createSchema(){
   db.exec(`
     CREATE TABLE IF NOT EXISTS users(
@@ -580,6 +601,7 @@ async function start(){
   try{ renderUsers(); }catch(e){}
   try{ setupBackupUI(); }catch(e){}
   try{ setupPasswordStrengthIndicators(); }catch(e){}
+  try{ setupMobileBanner(); }catch(e){}
   // Register service worker for offline support
   if ('serviceWorker' in navigator){
     try{

@@ -1,7 +1,7 @@
 {
   "name": "pos-offline-prototype",
   "version": "0.1.0",
-  "description": "Prototype POS offline (PWA) dengan sqlite.js dan scanner EAN-13",
+  "description": "Prototype POS offline (PWA) with sql.js and ZXing",
   "scripts": {
     "start": "python3 -m http.server 8000",
     "serve": "python3 -m http.server 8000",
@@ -13,26 +13,4 @@
   },
   "author": "",
   "license": "MIT"
-}
-{
-  "name": "pos-offline-prototype",
-  "version": "0.1.0",
-  "description": "Prototype POS offline (PWA) dengan sqlite.js dan scanner EAN-13",
-  "scripts": {
-    "start": "python3 -m http.server 8000"
-  },
-  "author": "",
-  "license": "MIT"
-}
-{
-  "name": "pos-offline-prototype",
-  "version": "0.1.0",
-  "description": "Prototype POS offline (PWA) using sql.js and ZXing",
-  "scripts": {
-    "start": "http-server -c-1 -p 8000",
-    "serve": "python3 -m http.server 8000"
-  },
-  "author": "",
-  "license": "MIT",
-  "devDependencies": {}
 }

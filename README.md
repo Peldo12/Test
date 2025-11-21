@@ -57,6 +57,29 @@ Catatan keamanan & produksi:
 - Password disimpan dengan hashing SHA-256 (tanpa salt) di prototype; untuk produksi gunakan hashing ter-salt (PBKDF2/Argon2) dan mekanisme penyimpanan yang lebih aman.
 - Untuk penggunaan di Android secara offline jangka panjang, gunakan Capacitor + native SQLite/Room.
 
+## Building Android package (APK/AAB)
+
+There are two ways to produce an Android package from this project:
+
+1) Local (recommended if you have Android Studio)
+
+- Install prerequisites: Android Studio, Android SDK (API 33+), JDK 11+.
+- Ensure Node dependencies are installed: `npm ci`.
+- Prepare web assets: `npm run prepare:web` (this copies web files to `www/`).
+- Scaffold native project (already done in the `chore/mobile-banner` branch):
+	- `npx cap add android` (if not present)
+	- `npx cap copy android`
+- Open the generated `android/` project in Android Studio and build: `Build -> Generate Signed Bundle / APK...`.
+
+2) CI (GitHub Actions)
+
+- This repository includes a workflow `.github/workflows/android-build.yml` that prepares web assets and builds debug/release APKs using Gradle on GitHub Actions. Runs produce artifacts you can download from the Actions run.
+- Note: Release APKs produced by CI may be unsigned. To publish to Play Store you need to sign them using your keystore. You can add automatic signing in the workflow by storing the keystore and passwords as GitHub Secrets (`KEYSTORE_BASE64`, `KEYSTORE_PASSWORD`, `KEY_ALIAS`, `KEY_PASSWORD`).
+
+If you want, I can:
+- Add automatic signing steps to the workflow (you'll need to provide keystore secrets), or
+- Clean the `android/` folder out of the repo and only rely on CI builds.
+
 
 Lisensi: contoh bebas pakai untuk pengembangan internal.
 # Test

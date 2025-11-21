@@ -33,6 +33,12 @@
         </div>
       </header>
 
+      <!-- Mobile banner: visible on small screens to reduce feeling 'kosong' -->
+      <div id="mobile-banner" class="mobile-banner" aria-hidden="false">
+        <button id="mobile-banner-close" class="mobile-banner-close" aria-label="Tutup banner">×</button>
+        <p style="margin:0"><strong>POS Offline</strong> — Untuk tampilan lebih baik gunakan landscape atau perbesar layar. <a href="/offline.html">Info offline</a></p>
+      </div>
+
       <main>
         <section id="cashier-page" class="page hidden">
           <h2>Kasir</h2>
@@ -50,10 +56,12 @@
 
           <div id="cart">
             <h3>Daftar Belanja</h3>
+            <div class="table-responsive">
             <table id="cart-table">
               <thead><tr><th>Produk</th><th>Jumlah</th><th>Harga</th><th>Total</th><th>Aksi</th></tr></thead>
               <tbody></tbody>
             </table>
+            </div>
             <div id="cart-total">Total: <span id="total-value">0</span></div>
             <div class="controls">
               <select id="payment-method">
@@ -76,10 +84,12 @@
             <button id="btn-add-product" class="primary">Simpan / Tambah</button>
           </div>
           <h3>Daftar Produk</h3>
+          <div class="table-responsive">
           <table id="products-table">
             <thead><tr><th>Kode</th><th>Nama</th><th>Harga</th><th>Stok</th><th>Kategori</th><th>Aksi</th></tr></thead>
             <tbody></tbody>
           </table>
+          </div>
           <h3>Manajemen Pengguna</h3>
           <div id="user-form" class="controls">
             <input id="u-username" placeholder="Username" />
@@ -97,10 +107,12 @@
             <button id="btn-change-password" class="primary">Ubah Password</button>
             <span id="pwd-strength" style="margin-left:8px;color:#666;font-size:13px"></span>
           </div>
+          <div class="table-responsive">
           <table id="users-table">
             <thead><tr><th>Username</th><th>Role</th><th>Aksi</th></tr></thead>
             <tbody></tbody>
           </table>
+          </div>
           <h3>Backup / Restore Database</h3>
           <div class="controls" id="backup-controls">
             <button id="btn-export-sqlite" class="secondary">Export .sqlite</button>
